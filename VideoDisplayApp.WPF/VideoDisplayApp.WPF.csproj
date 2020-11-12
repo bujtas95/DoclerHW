@@ -75,6 +75,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Enums\QualityEnum.cs" />
+    <Compile Include="Enums\TagsEnum.cs" />
     <Compile Include="Models\Data.cs" />
     <Compile Include="Models\Pagination.cs" />
     <Compile Include="Models\Video.cs" />

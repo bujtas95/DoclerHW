@@ -11,6 +11,7 @@ using VideoDisplayApp.WPF.Models;
 
 namespace VideoDisplayApp.WPF.ViewModels
 {
+
     public class VideoDisplayViewModel : Screen
     {
         #region Properties
@@ -23,6 +24,62 @@ namespace VideoDisplayApp.WPF.ViewModels
             {
                 _videoGroup = value;
                 NotifyOfPropertyChange(() => VideoGroup);
+            }
+        }
+
+        private string _selectedQuality = "Any";
+        public string SelectedQuality
+        {
+            get { return _selectedQuality; }
+            set
+            {
+                _selectedQuality = value.ToString();
+                NotifyOfPropertyChange(() => SelectedQuality);
+            }
+        }
+
+        private List<string> _qualitySource = new List<string>();
+        public List<string> QualitySource
+        {
+            get
+            {
+                if (_qualitySource.Count > 0)
+                {
+                    return _qualitySource;
+                }
+                foreach (var quality in Enum.GetNames(typeof(QualityEnum)))
+                {
+                    _qualitySource.Add(quality);
+                }
+                return _qualitySource;
+            }
+        }
+
+        private List<string> _selectedTags = new List<string>();
+        public List<string> SelectedTags
+        {
+            get { return _selectedTags; }
+            set
+            {
+                _selectedTags = value;
+                NotifyOfPropertyChange(() => SelectedTags);
+            }
+        }
+
+        private List<string> _tagsList = new List<string>();
+        public List<string> TagsSource
+        {
+            get
+            {
+                if (_tagsList.Count > 0)
+                {
+                    return _tagsList;
+                }
+                foreach (var tag in Enum.GetNames(typeof(TagsEnum)))
+                {
+                    _tagsList.Add(tag);
+                }
+                return _tagsList;
             }
         }
 
@@ -48,6 +105,22 @@ namespace VideoDisplayApp.WPF.ViewModels
             var requestURL = string.Format("https://pt.ptawe.com/api/video-promotion/v1/list" +
                             "?psid=bujtas&accessKey=6ed04d4ad128f4f47d75530b0c49f8c1&clientIp=2a01:36d:114:6e02:d870:81ca:eec4:c1f5&" +
                             "limit=25&pageIndex={0}", currentPage);
+
+            if (!quality.Equals(QualityEnum.Any))
+            {
+                requestURL += string.Format("&quality={0}", quality.ToString().ToLower());
+            }
+            if (tags != null && tags.Count != 0)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append(tags.First().ToLower());
+                foreach (var element in tags.Skip(1))
+                {
+                    sb.Append(string.Format(",{0}", element).ToLower());
+                }
+                requestURL += "&tags=" + sb.ToString();
+            }
+
             try
             {
                 var response = await _videoApiService.GetAsync(requestURL);
