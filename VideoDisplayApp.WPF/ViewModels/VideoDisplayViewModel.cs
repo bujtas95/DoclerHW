@@ -16,6 +16,21 @@ namespace VideoDisplayApp.WPF.ViewModels
     {
         #region Properties
 
+        private long _currentPage;
+        public long CurrentPage
+        {
+            get { return _currentPage; }
+            set
+            {
+                if (value == 0)
+                {
+                    value = 1;
+                }
+                _currentPage = value;
+                NotifyOfPropertyChange(() => CurrentPage);
+            }
+        }
+
         private VideoGroup _videoGroup;
         public VideoGroup VideoGroup
         {
@@ -139,6 +154,7 @@ namespace VideoDisplayApp.WPF.ViewModels
                 {
                     VideoGroup = JsonConvert.DeserializeObject<VideoGroup>(response);
                     Videos = VideoGroup.Data.Videos.ToList();
+                    CurrentPage = currentPage;
                     result = true;
                 }
                 catch (JsonException e)
@@ -154,6 +170,7 @@ namespace VideoDisplayApp.WPF.ViewModels
         }
 
         #endregion
+
         #region Event Handling
 
         public void SelectOrUnselectTag(string tag)
@@ -168,12 +185,43 @@ namespace VideoDisplayApp.WPF.ViewModels
             }
         }
 
+        #region Button clicks
         public void Search()
         {
             Enum.TryParse(SelectedQuality, out QualityEnum quality);
             _ = GetVideoListAsync(1, quality, SelectedTags);
         }
 
+        public void GoToLastPage()
+        {
+            Enum.TryParse(SelectedQuality, out QualityEnum quality);
+            _ = GetVideoListAsync(VideoGroup.Data.Pagination.TotalPages, quality, SelectedTags);
+        }
+
+        public void GoToFirstPage()
+        {
+            Enum.TryParse(SelectedQuality, out QualityEnum quality);
+            _ = GetVideoListAsync(1, quality, SelectedTags);
+        }
+
+        public void GoToNextPage()
+        {
+            Enum.TryParse(SelectedQuality, out QualityEnum quality);
+            if (CurrentPage < VideoGroup.Data.Pagination.TotalPages)
+            {
+                _ = GetVideoListAsync(CurrentPage + 1, quality, SelectedTags);
+            }
+        }
+
+        public void GoToPreviousPage()
+        {
+            Enum.TryParse(SelectedQuality, out QualityEnum quality);
+            if (CurrentPage > 1)
+            {
+                _ = GetVideoListAsync(CurrentPage - 1, quality, SelectedTags);
+            }
+        }
+        #endregion
         #endregion
     }
 }

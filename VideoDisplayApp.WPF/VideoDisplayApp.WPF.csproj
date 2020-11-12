@@ -137,5 +137,11 @@
       <Name>VideoDisplayApp.UILibrary</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\left_chevron.png" />
+    <Resource Include="Icons\right_chevron.png" />
+    <Resource Include="Icons\left_chevron_double.png" />
+    <Resource Include="Icons\right_chevron_double.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
