@@ -15,6 +15,16 @@ namespace VideoDisplayApp.WPF.ViewModels
     public class VideoDisplayViewModel : Screen
     {
         #region Properties
+        private bool _canExecuteGetVideoGroup = true;
+        public bool CanExecuteGetVideoGroup
+        {
+            get { return _canExecuteGetVideoGroup; }
+            set
+            {
+                _canExecuteGetVideoGroup = value;
+                NotifyOfPropertyChange(() => CanExecuteGetVideoGroup);
+            }
+        }
 
         private long _currentPage;
         public long CurrentPage
@@ -128,10 +138,10 @@ namespace VideoDisplayApp.WPF.ViewModels
         private async Task<bool> GetVideoListAsync(long currentPage = 1, QualityEnum quality = QualityEnum.Any, List<string> tags = null)
         {
             var result = false;
+            CanExecuteGetVideoGroup = false;
             var requestURL = string.Format("https://pt.ptawe.com/api/video-promotion/v1/list" +
                             "?psid=bujtas&accessKey=6ed04d4ad128f4f47d75530b0c49f8c1&clientIp=2a01:36d:114:6e02:d870:81ca:eec4:c1f5&" +
                             "limit=25&pageIndex={0}", currentPage);
-
             if (!quality.Equals(QualityEnum.Any))
             {
                 requestURL += string.Format("&quality={0}", quality.ToString().ToLower());
@@ -146,7 +156,6 @@ namespace VideoDisplayApp.WPF.ViewModels
                 }
                 requestURL += "&tags=" + sb.ToString();
             }
-
             try
             {
                 var response = await _videoApiService.GetAsync(requestURL);
@@ -166,6 +175,7 @@ namespace VideoDisplayApp.WPF.ViewModels
             {
                 Console.WriteLine("HttpResponseException source: {0}", e.Source);
             }
+            CanExecuteGetVideoGroup = true;
             return result;
         }
 

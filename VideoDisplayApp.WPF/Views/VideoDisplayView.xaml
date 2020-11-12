@@ -42,7 +42,7 @@
             </StackPanel>
         </StackPanel>
         <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,50,0" >
-            <Button x:Name="Search" Height="35" Content="Search"  VerticalAlignment="Center" Width="200" FontWeight="Bold" />
+            <Button x:Name="Search" IsEnabled="{Binding CanExecuteGetVideoGroup}" Height="35" Content="Search"  VerticalAlignment="Center" Width="200" FontWeight="Bold" />
         </StackPanel>
 
         <!--Content-->
@@ -86,10 +86,10 @@
 
         <!--Footer-->
         <StackPanel MaxHeight="30" HorizontalAlignment="Center" Orientation="Horizontal"  Grid.Row="2">
-            <Button x:Name="GoToFirstPage" Width="40">
+            <Button x:Name="GoToFirstPage" Width="40" IsEnabled="{Binding CanExecuteGetVideoGroup}">
                 <Image Source="../Icons/left_chevron_double.png" Width="20" Height="20"/>
             </Button>
-            <Button Margin="5,0,0,0" x:Name="GoToPreviousPage" Width="40">
+            <Button Margin="5,0,0,0" x:Name="GoToPreviousPage" Width="40" IsEnabled="{Binding CanExecuteGetVideoGroup}">
                 <Image Source="../Icons/left_chevron.png" Width="20" Height="20"/>
             </Button>
             <StackPanel Orientation="Horizontal">
@@ -97,10 +97,10 @@
                 <TextBlock Margin="0,5" Foreground="DarkRed" FontWeight="Bold" Text="/"/>
                 <TextBlock Margin="8,5" Foreground="DarkRed" FontWeight="Bold" Text="{Binding VideoGroup.Data.Pagination.TotalPages}"/>
             </StackPanel>
-            <Button Margin="0,0,5,0" x:Name="GoToNextPage" Width="40">
+            <Button Margin="0,0,5,0" x:Name="GoToNextPage" Width="40" IsEnabled="{Binding CanExecuteGetVideoGroup}">
                 <Image Source="../Icons/right_chevron.png" Width="20" Height="20"/>
             </Button>
-            <Button x:Name="GoToLastPage" Width="40">
+            <Button x:Name="GoToLastPage" Width="40" IsEnabled="{Binding CanExecuteGetVideoGroup}">
                 <Image Source="../Icons/right_chevron_double.png" Width="20" Height="20"/>
             </Button>
         </StackPanel>
