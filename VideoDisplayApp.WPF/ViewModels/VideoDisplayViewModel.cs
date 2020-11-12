@@ -83,6 +83,17 @@ namespace VideoDisplayApp.WPF.ViewModels
             }
         }
 
+        private List<Video> _videos;
+        public List<Video> Videos
+        {
+            get { return _videos; }
+            set
+            {
+                _videos = value;
+                NotifyOfPropertyChange(() => Videos);
+            }
+        }
+
         #endregion
 
         #region ctor
@@ -127,6 +138,7 @@ namespace VideoDisplayApp.WPF.ViewModels
                 try
                 {
                     VideoGroup = JsonConvert.DeserializeObject<VideoGroup>(response);
+                    Videos = VideoGroup.Data.Videos.ToList();
                     result = true;
                 }
                 catch (JsonException e)
@@ -139,6 +151,27 @@ namespace VideoDisplayApp.WPF.ViewModels
                 Console.WriteLine("HttpResponseException source: {0}", e.Source);
             }
             return result;
+        }
+
+        #endregion
+        #region Event Handling
+
+        public void SelectOrUnselectTag(string tag)
+        {
+            if (SelectedTags.Contains(tag))
+            {
+                SelectedTags.Remove(tag);
+            }
+            else
+            {
+                SelectedTags.Add(tag);
+            }
+        }
+
+        public void Search()
+        {
+            Enum.TryParse(SelectedQuality, out QualityEnum quality);
+            _ = GetVideoListAsync(1, quality, SelectedTags);
         }
 
         #endregion

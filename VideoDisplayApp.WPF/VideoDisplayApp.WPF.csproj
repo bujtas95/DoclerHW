@@ -74,6 +74,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Converters\LongToDurationConverter.cs" />
+    <Compile Include="Converters\RawPathToImageSourceConverter.cs" />
+    <Compile Include="Converters\ToUpperValueConverter.cs" />
     <Compile Include="Enums\QualityEnum.cs" />
     <Compile Include="Enums\TagsEnum.cs" />
     <Compile Include="Models\Data.cs" />
