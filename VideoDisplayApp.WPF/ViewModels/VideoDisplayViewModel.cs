@@ -4,13 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VideoDisplayApp.UILibrary.API;
 
 namespace VideoDisplayApp.WPF.ViewModels
 {
     public class VideoDisplayViewModel : Screen
     {
-        public VideoDisplayViewModel()
+        private readonly IAPIHelper _videoApiService;
+        public VideoDisplayViewModel(IAPIHelper videoApiService)
         {
+            _videoApiService = videoApiService;
         }
     }
 }

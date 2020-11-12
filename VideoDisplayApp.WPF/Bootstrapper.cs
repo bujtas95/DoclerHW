@@ -2,9 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
+using VideoDisplayApp.UILibrary.API;
 using VideoDisplayApp.WPF.ViewModels;
 
 namespace VideoDisplayApp.WPF
@@ -23,7 +22,8 @@ namespace VideoDisplayApp.WPF
 
             _container
                 .Singleton<IWindowManager, WindowManager>()
-                .Singleton<IEventAggregator, EventAggregator>();
+                .Singleton<IEventAggregator, EventAggregator>()
+                .Singleton<IAPIHelper, APIHelper>();
 
             //To make unit testing easier it would be better to use an interface of ViewModelType
             //in RegisterPerRequest, but for this small application it is perfectly fine

@@ -124,5 +124,11 @@
   <ItemGroup>
     <Folder Include="Models\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VideoDisplayApp.UILibrary\VideoDisplayApp.UILibrary.csproj">
+      <Project>{A392C2F3-8BAD-44C8-B78E-F266F4533BF7}</Project>
+      <Name>VideoDisplayApp.UILibrary</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
