@@ -74,6 +74,10 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\Data.cs" />
+    <Compile Include="Models\Pagination.cs" />
+    <Compile Include="Models\Video.cs" />
+    <Compile Include="Models\VideoGroup.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\VideoDisplayViewModel.cs" />
     <Compile Include="Views\ShellView.xaml.cs">
@@ -121,9 +125,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\VideoDisplayApp.UILibrary\VideoDisplayApp.UILibrary.csproj">
       <Project>{A392C2F3-8BAD-44C8-B78E-F266F4533BF7}</Project>
